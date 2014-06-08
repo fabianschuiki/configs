@@ -94,7 +94,7 @@ bindsym $mod+Control+Right workspace next
 # switch to workspace
 bindsym $mod+1 workspace 1 www
 bindsym $mod+2 workspace 2 code
-bindsym $mod+3 workspace 3
+bindsym $mod+3 workspace 3 scratch
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
@@ -107,7 +107,7 @@ bindsym $mod+p scratchpad show
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1 www
 bindsym $mod+Shift+2 move container to workspace 2 code
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+3 move container to workspace 3 scratch
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
@@ -150,8 +150,49 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# launch app mode
+mode "launch" {
+	bindsym c exec google-chrome; mode "default"
+	bindsym n exec nautilus; mode "default"
+	bindsym	s exec sublime; mode "default"
+
+	# back to normal
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+Return mode "launch"
+
+# shutdown mode
+mode "shutdown" {
+	bindsym e exit
+	bindsym s exec gksudo poweroff; mode "default"
+	bindsym r exec gksudo reboot; mode "default"
+
+	# back to normal
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+Escape mode "shutdown"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3status
 }
+
+# assign windows to workspaces
+for_window [class="Brickland"] fullscreen
+for_window [class="calculator"] move scratchpad
+for_window [class="^tg$"] floating enable
+for_window [instance="^aurium"] floating enable
+for_window [instance="^aurisradio"] move scratchpad
+
+assign [class="chrome"] "1 www"
+assign [class="Brickland"] "3 scratch"
+assign [instance="^_pn"] "4"
+assign [instance="^isim"] "4"
+
+workspace "2 code" output "DVI-D-0"
+workspace "3 scratch" output "DVI-I-1"
