@@ -1,0 +1,55 @@
+# i3status configuration file
+# see "man i3status" for documentation
+# written by Fabian Schuiki
+
+general {
+	colors = true
+	interval = 5
+}
+
+order += "disk /"
+order += "disk /home"
+order += "ethernet eno1"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "load"
+order += "volume master"
+order += "tztime local"
+
+load {
+	format = "Load: %5min"
+	max_threshold = 5
+}
+
+cpu_temperature 0 {
+	format = "%degrees°C"
+	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
+}
+
+cpu_usage {
+	format = "CPU: %usage"
+}
+
+disk "/" {
+	format = "/ %free"
+}
+
+disk "/home" {
+	format = "/home %free"
+}
+
+ethernet eno1 {
+	format_up = "%ip"
+	format_down = "eno1 down"
+}
+
+volume master {
+	format = "Volume: %volume"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+tztime local {
+	format = "%A %Y-%m-%d %H:%M:%S"
+}

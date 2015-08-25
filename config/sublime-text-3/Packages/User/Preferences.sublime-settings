@@ -1,8 +1,12 @@
 {
-	"color_scheme": "Packages/Dayle Rees Color Schemes/sublime/freshcut.tmTheme",
+	"caret_extra_width": 1,
+	"color_scheme": "Packages/Base16 Color Schemes/base16-tomorrow.dark.tmTheme",
 	"ensure_newline_at_eof_on_save": true,
+	"findreplace_small": true,
+	"font_face": "Source Code Pro",
 	"font_size": 11,
 	"highlight_line": true,
+	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Vintage"
@@ -12,5 +16,9 @@
 		72,
 		80
 	],
-	"trim_trailing_white_space_on_save": true
+	"sidebar_small": true,
+	"tabs_small": true,
+	"theme": "predawn.sublime-theme",
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": true
 }

@@ -18,10 +18,11 @@ set $WS4 4: music
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-font pango: Ubuntu Mono 10
-font pango: DejaVu Sans Mono 10
-font pango: Sans Bold 10
+font pango: Sans 11
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# font pango: Ubuntu Mono 10
+# font pango: DejaVu Sans Mono 10
+# font pango: Sans Bold 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -144,35 +145,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# launch app mode
-set $launch_mode "launch: (c) chrome, (n) nautilus, (s) sublime"
-mode $launch_mode {
-	bindsym c exec google-chrome; mode "default"
-	bindsym n exec nautilus; mode "default"
-	bindsym	s exec sublime; mode "default"
-
-	# back to normal
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-bindsym $mod+Shift+Return mode $launch_mode
-
-# shutdown mode
-set $shutdown_mode "shutdown: (e) logout, (s) shutdown, (r) restart"
-mode $shutdown_mode {
-	bindsym e exit
-	bindsym s exec gksudo poweroff; mode "default"
-	bindsym r exec gksudo reboot; mode "default"
-	bindsym l exec ~/.i3/lock.sh; mode "default"
-
-	# back to normal
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-
-bindsym $mod+Escape mode $shutdown_mode
-
 # Use i3bar to display the workspace bar and additional system information.
 bar {
 	colors {
@@ -181,9 +153,20 @@ bar {
 		separator  #666666
 	}
 
-	position top
-	status_command i3status
+	status_command i3blocks -c ~/.i3/blocks
 }
+
+# bar {
+# 	colors {
+# 		background #000000
+# 		statusline #ffffff
+# 		separator  #666666
+# 	}
+#
+# 	separator_symbol " · "
+# 	position bottom
+# 	status_command i3status -c ~/.i3/status
+# }
 
 # assign windows to workspaces
 for_window [class="Brickland"] fullscreen
@@ -197,16 +180,17 @@ assign [class="(?i)chrome"] "$WS1"
 assign [class="(?i)chromium"] "$WS1"
 assign [instance="^rhythmbox"] "$WS4"
 assign [instance="^clementine"] "$WS4"
-assign [class="(?i)Spotify"] "$WS4"
 assign [class="Brickland"] "$WS3"
 assign [instance="^_pn"] "5"
 assign [instance="^isim"] "5"
+assign [class="(?i)Atlas"] "$WS3"
 
 # Map workspaces to displays.
 workspace "$WS1" output "DVI-I-1"
-workspace "$WS2" output "DVI-D-1"
+workspace "$WS2" output "DVI-D-0"
 workspace "$WS3" output "DVI-I-1"
 workspace "$WS4" output "DVI-I-1"
 
 # Startup programs.
 exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/current
+exec --no-startup-id "pulseaudio --start"

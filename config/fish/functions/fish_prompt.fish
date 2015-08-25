@@ -37,7 +37,7 @@ function fish_prompt --description "Displays the prompt"
 	# Append the status if it is non-zero.
 	if [ $last_status -ne 0 ]
 		printf " %s✖%d%s" \
-			(set_color --bold $fish_color_status) \
+			(set_color $fish_color_error) \
 			$last_status \
 			(set_color $fish_color_normal)
 	end
