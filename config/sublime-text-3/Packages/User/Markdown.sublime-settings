@@ -4,4 +4,6 @@
     "rulers": [],
     "font_size": 14,
     "highlight_line": false,
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
 }
