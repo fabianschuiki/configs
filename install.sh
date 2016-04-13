@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
 
 link() {
+	FLAGS=
+	echo -n "symlink $2 .. "
 	if [ ! -e $2 ]; then
-		ln -s $1 $2
+		FLAGS=-s
+	elif [ $(readlink $2) != "$1" ]; then
+		echo
+		read -p "  already exists, overwrite? [y/n] " -n 1 -r
+		echo "  "
+		if [[ $REPLY =~ ^[Yy]$ ]]; then
+			FLAGS=-sf
+		else
+			echo "  skipped"
+		fi
+	else
+		echo "up-to-date"
+	fi
+	if [ ! -z $FLAGS ]; then
+		ln $FLAGS $1 $2
+		echo "done"
 	fi
 }
 
@@ -19,6 +36,7 @@ fi
 DOTFILES=~/.dotfiles
 link $DOTFILES/vimrc ~/.vimrc
 link $DOTFILES/config/fish/functions ~/.config/fish/functions
+link $DOTFILES/tmux/tmux.conf.symlink ~/.tmux.conf
 
 # if [ "$(uname)" == "Darwin" ]; then
 # fi
