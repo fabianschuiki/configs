@@ -32,8 +32,8 @@ call vundle#end()
 filetype plugin indent on
 
 set background=dark
-let g:solarized_termcolors=16
 set t_Co=16
+let g:solarized_termcolors=16
 colorscheme solarized
 
 " Shortcut to toggle invisible characters
