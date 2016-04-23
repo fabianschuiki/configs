@@ -156,18 +156,6 @@ bar {
 	status_command i3blocks -c ~/.i3/blocks
 }
 
-# bar {
-# 	colors {
-# 		background #000000
-# 		statusline #ffffff
-# 		separator  #666666
-# 	}
-#
-# 	separator_symbol " · "
-# 	position bottom
-# 	status_command i3status -c ~/.i3/status
-# }
-
 # assign windows to workspaces
 for_window [class="Brickland"] fullscreen
 for_window [class="Untamed"] floating enable
@@ -175,6 +163,8 @@ for_window [class="calculator"] move scratchpad
 for_window [class="^tg$"] floating enable
 for_window [instance="^aurium"] floating enable
 for_window [instance="^aurisradio"] move scratchpad
+for_window [class="(?i)Skyhigh"] floating enable
+for_window [class="(?i)OpenSkyscraper"] floating enable
 
 assign [class="(?i)chrome"] "$WS1"
 assign [class="(?i)chromium"] "$WS1"
