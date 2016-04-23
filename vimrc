@@ -2,6 +2,7 @@ set nocompatible
 filetype off
 set laststatus=2
 set encoding=utf-8
+set tabstop=4
 
 syntax enable   " enable syntax highlighting by default
 set hidden      " leave hidden buffers open
@@ -31,5 +32,16 @@ call vundle#end()
 filetype plugin indent on
 
 set background=dark
-" let g:solarized_termcolors=16
+let g:solarized_termcolors=16
+set t_Co=16
 colorscheme solarized
+
+" Shortcut to toggle invisible characters
+nmap <leader>l :set list!<CR>
+set listchars=tab:▸\ ,eol:¬,trail:⎵
+highlight NonText ctermfg=10
+highlight SpecialKey ctermfg=10 ctermbg=8
+
+set hlsearch
+highlight ColorColumn ctermbg=7
+call matchadd('ColorColumn', '\%81v', 100)
