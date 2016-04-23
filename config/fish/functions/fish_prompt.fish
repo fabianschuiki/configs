@@ -1,5 +1,11 @@
-# Copyright (c) 2015 Fabian Schuiki
+# Copyright (c) 2015-2016 Fabian Schuiki
 # Personalized fish command prompt.
+
+# Configure the git prompt.
+set __fish_git_prompt_showdirtystate 'yes'
+set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showupstream 'yes'
+set __fish_git_prompt_color_branch yellow
 
 function fish_prompt --description "Displays the prompt"
 
@@ -11,10 +17,8 @@ function fish_prompt --description "Displays the prompt"
 	end
 
 	# Determine the delimiter and color depending on the current user.
-	set -l user_prompt ">"
 	switch $USER
 		case root
-			set user_prompt "#"
 			if not set -q __fish_prompt_cwd
 				if set -q fish_color_cwd_root
 					set -g __fish_prompt_cwd (set_color $fish_color_cwd_root)
@@ -36,12 +40,12 @@ function fish_prompt --description "Displays the prompt"
 
 	# Append the status if it is non-zero.
 	if [ $last_status -ne 0 ]
-		printf " %s✖%d%s" \
+		printf " %s✖ %d%s" \
 			(set_color $fish_color_error) \
 			$last_status \
 			(set_color $fish_color_normal)
 	end
 
-	printf "%s " $user_prompt
+	printf "\n❯ " $user_prompt
 
 end
