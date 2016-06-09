@@ -6,7 +6,6 @@
 	"color_scheme": "Packages/Solarized Color Scheme/Solarized (light).tmTheme",
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
-	"findreplace_small": true,
 	"font_face": "Source Code Pro",
 	"font_size": 12,
 	"highlight_line": true,
@@ -25,5 +24,6 @@
 	"theme": "Solarized Space Light.sublime-theme",
 	"tree_animation_enabled": false,
 	"trim_trailing_white_space_on_save": true,
+	"hide_sidebar_icons": true,
 	"word_wrap": true
 }
