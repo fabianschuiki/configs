@@ -1,12 +1,6 @@
 # Copyright (c) 2015-2016 Fabian Schuiki
 # Personalized fish command prompt.
 
-# Configure the git prompt.
-set __fish_git_prompt_showdirtystate 'yes'
-set __fish_git_prompt_showstashstate 'yes'
-set __fish_git_prompt_showupstream 'yes'
-set __fish_git_prompt_color_branch yellow
-
 function fish_prompt --description "Displays the prompt"
 
 	set -l last_status $status
@@ -33,18 +27,28 @@ function fish_prompt --description "Displays the prompt"
 	end
 
 	# Print user, hostname, and path.
-	printf "%s@%s %s%s%s%s" \
+	printf "%s@%s %s%s%s" \
 		$USER $__fish_prompt_hostname \
-		"$__fish_prompt_cwd" (prompt_pwd) (set_color $fish_color_normal) \
-		(__fish_git_prompt)
+		"$__fish_prompt_cwd" (prompt_pwd) (set_color $fish_color_normal)
 
-	# Append the status if it is non-zero.
-	if [ $last_status -ne 0 ]
-		printf " %s✖ %d%s" \
-			(set_color $fish_color_error) \
-			$last_status \
-			(set_color $fish_color_normal)
+	# Append git prompt if we're on a locally mounted file system.
+	set -l fstype (df -P -T . | tail -n +2 | awk '{print $2}')
+	if contains $fstype ext4 btrfs
+		__fish_git_prompt
 	end
+
+	# Append the status on the right-hand side.
+	set -l status_remark_color
+	set -l status_remark
+	if [ $last_status -ne 0 ]
+		set status_remark_color $fish_color_error
+		set status_remark  (printf "✖ %d" $last_status)
+	else
+		set status_remark_color green
+		set status_remark "✔"
+	end
+	tput hpa (math $COLUMNS - (string length -- $status_remark) - 4)
+	printf "[ %s%s%s ]" (set_color $status_remark_color) "$status_remark" (set_color $fish_color_normal)
 
 	printf "\n❯ " $user_prompt
 
