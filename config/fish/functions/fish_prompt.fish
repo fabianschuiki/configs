@@ -47,8 +47,12 @@ function fish_prompt --description "Displays the prompt"
 		set status_remark_color green
 		set status_remark "✔"
 	end
-	tput hpa (math $COLUMNS - (string length -- $status_remark) - 4)
-	printf "[ %s%s%s ]" (set_color $status_remark_color) "$status_remark" (set_color $fish_color_normal)
+	if [ $fish_prompt_status_align_right ]
+		tput hpa (math $COLUMNS - (string length -- $status_remark) - 4)
+		printf "[ %s%s%s ]" (set_color $status_remark_color) "$status_remark" (set_color $fish_color_normal)
+	else
+		printf " %s%s%s" (set_color $status_remark_color) "$status_remark" (set_color $fish_color_normal)
+	end
 
 	printf "\n❯ " $user_prompt
 
