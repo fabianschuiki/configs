@@ -7,7 +7,8 @@
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Source Code Pro",
-	"font_size": 12,
+	"font_size": 10,
+	"hide_sidebar_icons": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -24,6 +25,5 @@
 	"theme": "Solarized Space Light.sublime-theme",
 	"tree_animation_enabled": false,
 	"trim_trailing_white_space_on_save": true,
-	"hide_sidebar_icons": true,
 	"word_wrap": true
 }
