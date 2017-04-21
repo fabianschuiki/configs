@@ -2,8 +2,7 @@
 	"always_show_minimap_viewport": true,
 	"bold_folder_labels": true,
 	"caret_extra_width": 1,
-	"close_windows_when_empty": true,
-	"color_scheme": "Packages/Solarized Color Scheme/Solarized (light).tmTheme",
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
 	"font_face": "Source Code Pro",
@@ -11,18 +10,26 @@
 	"hide_sidebar_icons": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
+	"hot_exit": false,
 	"ignored_packages":
 	[
 		"Vintage"
 	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"material_theme_small_tab": true,
 	"overlay_scroll_bars": "enabled",
+	"remember_open_files": false,
 	"rulers":
 	[
 		72,
 		80
 	],
 	"scroll_past_end": false,
-	"theme": "Solarized Space Light.sublime-theme",
+	"theme": "Material-Theme.sublime-theme",
 	"tree_animation_enabled": false,
 	"trim_trailing_white_space_on_save": true,
 	"word_wrap": true
