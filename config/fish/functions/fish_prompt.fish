@@ -32,9 +32,13 @@ function fish_prompt --description "Displays the prompt"
 		"$__fish_prompt_cwd" (prompt_pwd) (set_color $fish_color_normal)
 
 	# Append git prompt if we're on a locally mounted file system.
-	set -l fstype (df -P -T . | tail -n +2 | awk '{print $2}')
-	if contains $fstype ext4 btrfs
+	if contains (uname) Darwin
 		__fish_git_prompt
+	else
+		set -l fstype (df -P -T . | tail -n +2 | awk '{print $2}')
+		if contains $fstype ext4 btrfs
+			__fish_git_prompt
+		end
 	end
 
 	# Append the status on the right-hand side.
