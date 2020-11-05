@@ -11,14 +11,18 @@
 
 set $mod Mod4
 
-set $WS1 1: www
-set $WS2 2: code
-set $WS3 3: scratch
-set $WS4 4: music
+# set $WS1 1: www
+# set $WS2 2: code
+# set $WS3 3: scratch
+# set $WS4 4: music
+# set $WS5 5: comms
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font pango: Sans 11
+# font pango: Monospace 9
+#font pango: Sans 9
+font pango: Sans 10
+# font pango: Monospace 10
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # font pango: Ubuntu Mono 10
 # font pango: DejaVu Sans Mono 10
@@ -38,7 +42,8 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+Left focus left
@@ -87,10 +92,10 @@ bindsym $mod+Shift+Control+Left move workspace to output left
 bindsym $mod+Shift+Control+Right move workspace to output right
 
 # switch to workspace
-bindsym $mod+1 workspace $WS1
-bindsym $mod+2 workspace $WS2
-bindsym $mod+3 workspace $WS3
-bindsym $mod+4 workspace $WS4
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
@@ -100,10 +105,10 @@ bindsym $mod+0 workspace 10
 bindsym $mod+p scratchpad show
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $WS1
-bindsym $mod+Shift+2 move container to workspace $WS2
-bindsym $mod+Shift+3 move container to workspace $WS3
-bindsym $mod+Shift+4 move container to workspace $WS4
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
@@ -145,16 +150,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Use i3bar to display the workspace bar and additional system information.
-bar {
-	colors {
-		background #000000
-		statusline #ffffff
-		separator  #666666
-	}
+## Use i3bar to display the workspace bar and additional system information.
+#bar {
+#	colors {
+#		background #000000
+#		statusline #ffffff
+#		separator  #666666
+#	}
 
-	status_command i3blocks -c ~/.i3/blocks
-}
+#	status_command i3blocks -c ~/.config/i3/blocks
+#}
 
 # assign windows to workspaces
 for_window [class="Brickland"] fullscreen
@@ -166,21 +171,28 @@ for_window [instance="^aurisradio"] move scratchpad
 for_window [class="(?i)Skyhigh"] floating enable
 for_window [class="(?i)OpenSkyscraper"] floating enable
 
-assign [class="(?i)chrome"] "$WS1"
-assign [class="(?i)chromium"] "$WS1"
-assign [instance="^rhythmbox"] "$WS4"
-assign [instance="^clementine"] "$WS4"
-assign [class="Brickland"] "$WS3"
-assign [instance="^_pn"] "5"
-assign [instance="^isim"] "5"
-assign [class="(?i)Atlas"] "$WS3"
+# assign [class="(?i)chrom(e|ium)"] "$WS1"
+# assign [class="(?i)thunderbird"] "$WS1"
+# assign [instance="^rhythmbox"] "$WS4"
+# assign [instance="^clementine"] "$WS4"
+# assign [class="Brickland"] "$WS3"
+# assign [instance="^_pn"] "5"
+# assign [instance="^isim"] "5"
+# assign [class="(?i)Atlas"] "$WS3"
+# assign [class="(?i)Franz"] "$WS5"
+# assign [class="(?i)Slack"] "$WS5"
 
 # Map workspaces to displays.
-workspace "$WS1" output "DVI-I-1"
-workspace "$WS2" output "DVI-D-0"
-workspace "$WS3" output "DVI-I-1"
-workspace "$WS4" output "DVI-I-1"
+# workspace "$WS1" output "DVI-D-0"
+# workspace "$WS2" output "DVI-I-1"
+# workspace "$WS3" output "DVI-D-0"
+# workspace "$WS4" output "DVI-D-0"
+# workspace "$WS5" output "DVI-D-0"
 
 # Startup programs.
-exec --no-startup-id feh --bg-fill ~/Pictures/Wallpapers/current
-exec --no-startup-id "pulseaudio --start"
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id feh --bg-fill /usr/share/backgrounds/gnome/Road.jpg
+# exec --no-startup-id pulseaudio --start
+# exec --no-startup-id franz-bin
+# exec --no-startup-id slack
+# exec --no-startup-id thunderbird

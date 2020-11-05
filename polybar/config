@@ -1,0 +1,182 @@
+; Copyright (c) 2020 Fabian Schuiki
+
+[settings]
+screenchange-reload = true
+
+[colors]
+background = #000000
+foreground = #ccffffff
+
+accent-blue = #23c1ff
+accent-green = #aaff77
+accent-yellow = #fba922
+accent-red = #ff5555
+accent-violet = #c792ea
+
+state-ok = ${colors.accent-green}
+state-warn = ${colors.accent-yellow}
+state-bad = ${colors.accent-red}
+
+i3-workspace = ${colors.accent-blue}
+i3-mode = ${colors.accent-red}
+i3-urgent = ${colors.accent-red}
+
+
+;;;;;;;;;;;;;;
+;;   BARS   ;;
+;;;;;;;;;;;;;;
+
+[bar-base]
+monitor = ${env:MONITOR}
+width = 100%
+height = 32
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+line-color = ${colors.background}
+line-size = 2
+
+font-0 = NotoSans:size=10;2
+font-1 = NotoSansMono:size=10;3
+font-2 = MaterialIcons:size=14;5
+font-3 = FontAwesome:size=12;3
+font-4 = FontAwesome5FreeRegular:size=12;3
+font-5 = FontAwesome5FreeSolid:size=12;3
+
+spacing = 3
+module-margin = 5
+tray-maxsize = 24
+tray-padding = 2
+
+[bar/top]
+inherit = bar-base
+padding-right = 5
+modules-left = powermenu
+modules-right = volume wired-network date
+
+[bar/bottom]
+inherit = bar-base
+bottom = true
+padding-right = 5
+modules-left = i3
+modules-right = keyboard temperature cpu memory filesystem volume wired-network date
+tray-position = right
+scroll-up = i3wm-wsnext
+scroll-down = i3wm-wsprev
+
+
+;;;;;;;;;;;;;;;;;
+;;   MODULES   ;;
+;;;;;;;;;;;;;;;;;
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label =    %percentage%%
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-foreground = ${colors.state-ok}
+ramp-coreload-1 = ▂
+ramp-coreload-1-foreground = ${colors.state-ok}
+ramp-coreload-2 = ▃
+ramp-coreload-2-foreground = ${colors.state-ok}
+ramp-coreload-3 = ▄
+ramp-coreload-3-foreground = ${colors.state-ok}
+ramp-coreload-4 = ▅
+ramp-coreload-4-foreground = ${colors.state-warn}
+ramp-coreload-5 = ▆
+ramp-coreload-5-foreground = ${colors.state-warn}
+ramp-coreload-6 = ▇
+ramp-coreload-6-foreground = ${colors.state-bad}
+ramp-coreload-7 = █
+ramp-coreload-7-foreground = ${colors.state-bad}
+
+[module/memory]
+type = internal/memory
+format = <label> <bar-used>
+label =    %gb_used%
+bar-used-width = 16
+bar-used-foreground-0 = ${colors.state-ok}
+bar-used-foreground-1 = ${colors.state-ok}
+bar-used-foreground-2 = ${colors.state-warn}
+bar-used-foreground-3 = ${colors.state-bad}
+bar-used-indicator = |
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-empty = ─
+bar-used-empty-foreground = #44
+
+[module/date]
+type = internal/date
+date =    %%{F#99}%Y-%m-%d%%{F-}  %%{F#fff}%H:%M:%S%%{F-}
+
+[module/wired-network]
+type = internal/network
+interface = eno1
+interval = 3.0
+label-connected =    %local_ip%
+label-disconnected =    %ifname% disconnected
+label-disconnected-foreground = #66
+
+[module/volume]
+type = internal/alsa
+format-volume = <ramp-volume> <label-volume>
+label-muted =   muted
+label-muted-foreground = #66
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 3
+label-mode-foreground = #000
+label-mode-background = ${colors.i3-mode}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-foreground= ${colors.i3-workspace}
+label-focused-background = ${colors.background}
+label-focused-underline = ${colors.i3-workspace}
+label-focused-padding = 3
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 3
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-foreground = #000
+label-urgent-background = ${colors.i3-urgent}
+label-urgent-padding = 3
+
+[module/filesystem]
+type = internal/fs
+spacing = 5
+label-mounted =    %{F#66}%mountpoint%%{F-}   %free% (%percentage_used%%)
+mount-0 = /
+mount-1 = /home
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 2
+label =    %temperature-c%
+
+[module/keyboard]
+type = internal/xkeyboard
+format =    <label-layout>

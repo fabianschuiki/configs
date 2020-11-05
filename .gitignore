@@ -1,3 +1,20 @@
-.*
-!.gitignore
-*~
+# Ignore everything, but descend into directories
+*
+!*/
+
+# Whitelist
+!/.gitignore
+
+!/i3/**
+!/polybar/**
+!/rofi/**
+
+!/alacritty.yml
+!/fontconfig/fonts.conf
+
+!/fish/config.fish
+!/fish/functions/fish_prompt.fish
+
+!/sublime-text-3/Packages/User/Preferences.sublime-settings
+!/sublime-text-3/Packages/User/Markdown.sublime-settings
+!/sublime-text-3/Packages/User/Diff.sublime-settings

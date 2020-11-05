@@ -1,86 +1,86 @@
 # i3blocks configuration file
 
-command=/usr/lib/i3blocks/$BLOCK_NAME
-separator_block_width=15
+command=/usr/lib/i3blocks/$BLOCK_NAME/$BLOCK_NAME
+separator_block_width=20
 markup=none
 
 # Volume indicator
 [volume]
-label=
+label= 
 instance=Master
 interval=once
 signal=10
 
 # Memory usage
-[block]
-markup=pango
-command=echo "<span foreground='#aaa' size='smaller'>Memory</span>"
-interval=1
-separator=false
+# [funky]
+# markup=pango
+# full_text=<span foreground='#aaa' size='smaller'>Memory</span>
+# separator=false
 
 [memory]
-label=FREE
-separator=false
+label=Memory:  
+# separator=false
 interval=30
 
 [memory]
-label=SWAP
+label=Swap:  
 instance=swap
 interval=30
 
 # Disk usage
-[block]
-markup=pango
-command=echo "<span foreground='#aaa' size='smaller'>Disk</span>"
-interval=1
-separator=false
+# [block]
+# markup=pango
+# command=echo "<span foreground='#aaa' size='smaller'>Disk</span>"
+# interval=1
+# separator=false
 
 [disk]
-label=
+label= 
 instance=/
 interval=30
-separator=false
+# separator=false
 
 [disk]
-label=
+label= 
 instance=/home
 interval=30
 
 # Network usage
-[block]
-markup=pango
-command=echo "<span foreground='#aaa' size='smaller'>Ethernet</span>"
-interval=1
-separator=false
+# [block]
+# markup=pango
+# command=echo "<span foreground='#aaa' size='smaller'>Ethernet</span>"
+# interval=1
+# separator=false
 
 [iface]
-label=
+label= 
 instance=eno1
 interval=10
 
 # CPU usage
-[block]
-markup=pango
-command=echo "<span foreground='#aaa' size='smaller'>CPU</span>"
-interval=5
-separator=false
+# [block]
+# markup=pango
+# command=echo "<span foreground='#aaa' size='smaller'>CPU</span>"
+# interval=5
+# separator=false
 
 [cpu_usage]
-label=
+label= 
 interval=5
-separator=false
+# separator=false
 
 [load_average]
+label=♻  
 interval=5
-separator=false
+# separator=false
 
 [temperature]
-command=/usr/lib/i3blocks/temperature --chip coretemp-isa-0000
-label=
+command=/usr/lib/i3blocks/temperature/temperature --chip coretemp-isa-0000
+label= 
 interval=5
 
 # Time
 [time]
-label=
-command=date "+%A %Y-%m-%d %H:%M:%S"
+label=  
+command=date "+%A  %Y-%m-%d  %H:%M:%S"
 interval=1

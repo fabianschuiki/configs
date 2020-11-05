@@ -32,10 +32,14 @@ cpu_usage {
 
 disk "/" {
 	format = "/ %free"
+	low_threshold = 10
+	threshold_type = percentage_avail
 }
 
 disk "/home" {
 	format = "/home %free"
+	low_threshold = 10
+	threshold_type = percentage_avail
 }
 
 ethernet eno1 {

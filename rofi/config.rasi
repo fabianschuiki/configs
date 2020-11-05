@@ -1,0 +1,13 @@
+configuration {
+    combi-modi: "drun,run";
+    modi: "run,drun,ssh";
+    font: "Monospace 10";
+    // columns: 3;
+    // padding: 10;
+    // lines: 5;
+    // line-padding: 5;
+    matching: "fuzzy";
+    sort: true;
+    theme: "base16";
+    // sidebar-mode: true;
+}
