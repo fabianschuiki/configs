@@ -1,0 +1,5 @@
+# launch commands (taurus)
+set $mode_launch_sublime "subl -n"
+set $mode_launch_browser "chromium"
+set $mode_launch_wr "subl -n ~/eth/wr/$(date +%G-%V).md"
+

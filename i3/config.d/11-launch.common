@@ -1,0 +1,4 @@
+# launch commands (common)
+set $mode_launch_files "nautilus"
+set $mode_launch_todo "chromium https://hackmd.io/8-Kwutl7RTK0vmRJNAiTgw"
+

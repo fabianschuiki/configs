@@ -1,0 +1,34 @@
+#!/bin/sh
+lock() {
+	local INPUT=/tmp/lock.png
+	local OUTPUT=/tmp/lock_mod.png
+	import -window root $INPUT
+	~fschuiki/bin/i3composelock $INPUT $OUTPUT
+	i3lock -e -t -i $OUTPUT
+}
+
+case "$1" in
+	lock)
+		lock
+		;;
+	logout)
+		i3-msg exit
+		;;
+	suspend)
+		lock && systemctl suspend
+		;;
+	hibernate)
+		lock && systemctl hibernate
+		;;
+	reboot)
+		systemctl reboot
+		;;
+	shutdown)
+		systemctl poweroff
+		;;
+	*)
+		echo "usage: $0 {lock|logout|suspend|hibernate|reboot|shutdown}" >&2
+		exit 1
+esac
+
+exit 0

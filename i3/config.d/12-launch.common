@@ -1,0 +1,17 @@
+# launch application
+set $mode_launch launch: (s) sublime, (c) chrome, (n) nautilus, (t) TODO list, (w) current WR
+
+mode "$mode_launch" {
+    bindsym s exec $mode_launch_sublime, mode "default"
+    bindsym c exec $mode_launch_browser, mode "default"
+    bindsym n exec $mode_launch_files, mode "default"
+    bindsym t exec $mode_launch_todo, mode "default"
+    bindsym w exec $mode_launch_wr, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+Return mode "$mode_launch"
+

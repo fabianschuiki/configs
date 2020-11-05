@@ -28,13 +28,6 @@ bindsym $mod+l exec --no-startup-id i3exit lock
 
 # kill focused window
 bindsym $mod+Shift+q kill
-# start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+d exec --no-startup-id rofi -show run
 
 # change focus
 bindsym $mod+Left focus left
@@ -55,7 +48,7 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -65,6 +58,10 @@ bindsym $mod+e layout toggle split
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 
+# move to and toggle scratchpad
+bindsym $mod+p scratchpad show
+bindsym $mod+Shift+p move scratchpad
+
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -73,14 +70,6 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
-
-# cycle through workspaces
-bindsym $mod+Control+Left workspace prev
-bindsym $mod+Control+Right workspace next
-
-# move workspaces
-bindsym $mod+Shift+Control+Left move workspace to output left
-bindsym $mod+Shift+Control+Right move workspace to output right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -93,7 +82,6 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
-bindsym $mod+p scratchpad show
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -106,7 +94,6 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-bindsym $mod+Shift+p move scratchpad
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -114,33 +101,65 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # resize window (you can also use the mouse for that)
 mode "resize" {
-	# These bindings trigger as soon as you enter the resize mode
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-	# Pressing left will shrink the window’s width.
-	# Pressing right will grow the window’s width.
-	# Pressing up will shrink the window’s height.
-	# Pressing down will grow the window’s height.
-	bindsym j resize shrink width 10 px or 10 ppt
-	bindsym k resize grow height 10 px or 10 ppt
-	bindsym l resize shrink height 10 px or 10 ppt
-	bindsym odiaeresis resize grow width 10 px or 10 ppt
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+# launch commands (common)
+set $mode_launch_files "nautilus"
+set $mode_launch_todo "chromium https://hackmd.io/8-Kwutl7RTK0vmRJNAiTgw"
 
-	# same bindings, but for the arrow keys
-	bindsym Left resize shrink width 10 px or 10 ppt
-	bindsym Down resize grow height 10 px or 10 ppt
-	bindsym Up resize shrink height 10 px or 10 ppt
-	bindsym Right resize grow width 10 px or 10 ppt
+# launch commands (taurus)
+set $mode_launch_sublime "subl -n"
+set $mode_launch_browser "chromium"
+set $mode_launch_wr "subl -n ~/eth/wr/$(date +%G-%V).md"
 
-	# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+# launch application
+set $mode_launch launch: (s) sublime, (c) chrome, (n) nautilus, (t) TODO list, (w) current WR
+
+mode "$mode_launch" {
+    bindsym s exec $mode_launch_sublime, mode "default"
+    bindsym c exec $mode_launch_browser, mode "default"
+    bindsym n exec $mode_launch_files, mode "default"
+    bindsym t exec $mode_launch_todo, mode "default"
+    bindsym w exec $mode_launch_wr, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+Shift+Return mode "$mode_launch"
 
+# system management
+set $mode_system system: (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (shift-s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/.config/i3/exit lock, mode "default"
+    bindsym e exec --no-startup-id ~/.config/i3/exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/.config/i3/exit suspend, mode "default"
+    bindsym h exec --no-startup-id ~/.config/i3/exit hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/.config/i3/exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id ~/.config/i3/exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
 ## Use i3bar to display the workspace bar and additional system information.
 #bar {
 #	colors {
@@ -148,43 +167,13 @@ bindsym $mod+r mode "resize"
 #		statusline #ffffff
 #		separator  #666666
 #	}
-
 #	status_command i3blocks -c ~/.config/i3/blocks
 #}
 
-# assign windows to workspaces
-for_window [class="Brickland"] fullscreen
-for_window [class="Untamed"] floating enable
-for_window [class="calculator"] move scratchpad
-for_window [class="^tg$"] floating enable
-for_window [instance="^aurium"] floating enable
-for_window [instance="^aurisradio"] move scratchpad
-for_window [class="(?i)Skyhigh"] floating enable
-for_window [class="(?i)OpenSkyscraper"] floating enable
-
-# assign [class="(?i)chrom(e|ium)"] "$WS1"
-# assign [class="(?i)thunderbird"] "$WS1"
-# assign [instance="^rhythmbox"] "$WS4"
-# assign [instance="^clementine"] "$WS4"
-# assign [class="Brickland"] "$WS3"
-# assign [instance="^_pn"] "5"
-# assign [instance="^isim"] "5"
-# assign [class="(?i)Atlas"] "$WS3"
-# assign [class="(?i)Franz"] "$WS5"
-# assign [class="(?i)Slack"] "$WS5"
-
-# Map workspaces to displays.
-# workspace "$WS1" output "DVI-D-0"
-# workspace "$WS2" output "DVI-I-1"
-# workspace "$WS3" output "DVI-D-0"
-# workspace "$WS4" output "DVI-D-0"
-# workspace "$WS5" output "DVI-D-0"
+# Use rofi as program launcher.
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+Control+Return exec --no-startup-id rofi -show run
 
 # Startup programs.
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id feh --bg-fill /usr/share/backgrounds/gnome/Road.jpg
-# exec --no-startup-id pulseaudio --start
-# exec --no-startup-id franz-bin
-# exec --no-startup-id slack
-# exec --no-startup-id thunderbird
-# This concludes the configuration.

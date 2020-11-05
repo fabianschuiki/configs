@@ -1,0 +1,17 @@
+## Use i3bar to display the workspace bar and additional system information.
+#bar {
+#	colors {
+#		background #000000
+#		statusline #ffffff
+#		separator  #666666
+#	}
+#	status_command i3blocks -c ~/.config/i3/blocks
+#}
+
+# Use rofi as program launcher.
+bindsym $mod+d exec --no-startup-id rofi -show run
+bindsym $mod+Shift+Control+Return exec --no-startup-id rofi -show run
+
+# Startup programs.
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id feh --bg-fill /usr/share/backgrounds/gnome/Road.jpg
