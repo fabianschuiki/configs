@@ -172,8 +172,8 @@ bindsym $mod+Pause mode "$mode_system"
 
 # Use rofi as program launcher.
 bindsym $mod+d exec --no-startup-id rofi -show run
-bindsym $mod+Shift+Control+Return exec --no-startup-id rofi -show run
+bindsym $mod+Shift+Control+Return exec --no-startup-id rofi -show drun
 
 # Startup programs.
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-exec --no-startup-id feh --bg-fill /usr/share/backgrounds/gnome/Road.jpg
+exec --no-startup-id feh --bg-fill ~/.config/i3/backgrounds/Road.jpg
