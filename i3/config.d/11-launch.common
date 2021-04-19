@@ -1,4 +1,5 @@
 # launch commands (common)
 set $mode_launch_files "nautilus"
-set $mode_launch_todo "chromium https://hackmd.io/8-Kwutl7RTK0vmRJNAiTgw"
-
+set $mode_launch_todo "google-chrome-stable https://hackmd.io/8-Kwutl7RTK0vmRJNAiTgw"
+set $mode_launch_browser "google-chrome-stable"
+set $mode_launch_work "google-chrome-stable http://sifive.slack.com/ https://calendar.google.com/calendar/u/1 https://mail.google.com/mail/u/1 https://sifive.atlassian.net/jira/your-work"

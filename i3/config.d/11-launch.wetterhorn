@@ -1,5 +1,3 @@
 # launch commands (wetterhorn)
 set $mode_launch_sublime "sublime_text -n"
-set $mode_launch_browser "google-chrome"
-set $mode_launch_wr "sublime_text -n /home/fschuiki/docs/wr/$(date +%G-%V).md"
 

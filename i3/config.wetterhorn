@@ -119,22 +119,21 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 # launch commands (common)
 set $mode_launch_files "nautilus"
-set $mode_launch_todo "chromium https://hackmd.io/8-Kwutl7RTK0vmRJNAiTgw"
-
+set $mode_launch_todo "google-chrome-stable https://hackmd.io/8-Kwutl7RTK0vmRJNAiTgw"
+set $mode_launch_browser "google-chrome-stable"
+set $mode_launch_work "google-chrome-stable http://sifive.slack.com/ https://calendar.google.com/calendar/u/1 https://mail.google.com/mail/u/1 https://sifive.atlassian.net/jira/your-work"
 # launch commands (wetterhorn)
 set $mode_launch_sublime "sublime_text -n"
-set $mode_launch_browser "google-chrome"
-set $mode_launch_wr "sublime_text -n /home/fschuiki/docs/wr/$(date +%G-%V).md"
 
 # launch application
-set $mode_launch launch: (s) sublime, (c) chrome, (n) nautilus, (t) TODO list, (w) current WR
+set $mode_launch launch: (s) sublime, (c) chrome, (n) nautilus, (t) TODO list, (w) SiFive
 
 mode "$mode_launch" {
     bindsym s exec $mode_launch_sublime, mode "default"
     bindsym c exec $mode_launch_browser, mode "default"
     bindsym n exec $mode_launch_files, mode "default"
     bindsym t exec $mode_launch_todo, mode "default"
-    bindsym w exec $mode_launch_wr, mode "default"
+    bindsym w exec $mode_launch_work, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
