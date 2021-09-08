@@ -52,8 +52,8 @@
 	"color_scheme": "Packages/Material Theme/schemes/Material-Theme.tmTheme",
 	"enable_tab_scrolling": false,
 	"ensure_newline_at_eof_on_save": true,
-	"font_face": "Noto Sans Mono",
-	"hide_sidebar_icons": true,
+	"font_face": "Iosevka",
+	"font_size": 11,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"hot_exit": false,
@@ -61,7 +61,6 @@
 	[
 		"Vintage",
 	],
-	"material_theme_small_tab": true,
 	"overlay_scroll_bars": "enabled",
 	"remember_open_files": false,
 	"rulers":

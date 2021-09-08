@@ -1,4 +1,4 @@
-; Copyright (c) 2020 Fabian Schuiki
+; Copyright (c) 2020-2021 Fabian Schuiki
 
 [settings]
 screenchange-reload = true
@@ -60,7 +60,7 @@ inherit = bar-base
 bottom = true
 padding-right = 5
 modules-left = i3
-modules-right = keyboard temperature-cpu temperature-gpu cpu memory filesystem volume wired-network date
+modules-right = backup-data keyboard temperature-cpu temperature-gpu cpu memory filesystem volume wired-network date
 tray-position = right
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
@@ -171,6 +171,7 @@ type = internal/fs
 spacing = 5
 label-mounted =    %{F#66}%mountpoint%%{F-}   %free% (%percentage_used%%)
 mount-0 = /
+mount-1 = /data
 
 [module/temperature-cpu]
 type = internal/temperature
@@ -185,3 +186,9 @@ label =    %{F#66}GPU%{F-}  %temperature-c%
 [module/keyboard]
 type = internal/xkeyboard
 format =    <label-layout>
+
+[module/backup-data]
+type = custom/script
+exec = systemctl --user status backup-data | grep "Active: active"
+label = 
+format-foreground = ${colors.accent-yellow}
