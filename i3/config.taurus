@@ -175,8 +175,12 @@ bindsym $mod+Pause mode "$mode_system"
 bindsym $mod+d exec --no-startup-id rofi -show run
 bindsym $mod+Shift+Control+Return exec --no-startup-id rofi -show drun
 
+# Always put SpeedCrunch on scratchpad.
+for_window [instance="speedcrunch"] move window to scratchpad, resize set 800 600
+
 # Startup programs.
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 exec --no-startup-id feh --bg-fill ~/.config/i3/backgrounds/Road.jpg
 exec --no-startup-id synology-drive start
 # exec --no-startup-id dropbox
+exec --no-startup-id speedcrunch
